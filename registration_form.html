@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration form</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #9cc489;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .bg-container {
+    background-color: #9cc489;
+    height: 100%;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .main-heading {
+    font-style: italic;
+    text-align: center;
+  }
+
+  .container {
+    margin-top: 15px;
+    align-items: center;
+  }
+
+  .container2 {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .MyForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px;
+    width: 80vh;
+    border-radius: 10px;
+    align-self: center;
+    background-color: #fffdf3;
+  }
+</style>
+</head>
+<body>
+  <div class="bg-container">
+    <a href ="C:\Users\sahit\OneDrive\Documents\College\SEM-5\LAB ASSIGNMENTS\mini_project\ass2_web-1.html">Go Back</a>
+    <h2 class="main-heading">REGISTRATION FORM</h2>
+    <form class="MyForm" onsubmit="formValidation(event)">
+      <div>
+        <label for="FirstName">First Name:<span style="color:red;">*</span></label>
+        <input type="text" id="FirstName" name="FirstName" required />
+      </div>
+      <br>
+      <div>
+        <label for="LastName">Last Name:</label>
+        <input type="text" id="LastName" name="LastName" required />
+      </div>
+      <div class="container">
+        <label for="gender">Select Gender:</label>
+        <select id="gender" name="gender" required>
+          <option value="male">MALE</option>
+          <option value="female" selected>FEMALE</option>
+          <option value="not-specified">Prefer not to say</option>
+        </select>
+      </div>
+      <div class="container">
+        <label for="email">Email: <span style="color:red;">*</span></label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="container">
+        <label for="pw">Password:<span style="color:red;">*</span></label>
+        <input type="password" id="pw" name="pw" required />
+      </div>
+      <div class="container2">
+        <p style="margin-right:15px;margin-left:0px"><label for="Address">Address:<span style="color:red;">*</span></label></p>
+        <textarea id="Address" name="Address" rows="5" cols="22" required></textarea>
+      </div>
+      <div class="container">
+        <label for="mobileno">Mobile No.<span style="color:red;">*</span></label>
+        <input type="tel" id="mobileno" name="mobileno" required pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" />
+      </div>
+      <div class="container">
+        <label for="dob">Date of Birth: </label>
+        <input id="dob" type="date" name="dob" required />
+      </div>
+      <div class="container">
+        <p><label>Do you have a Passport?<span style="color:red;">*</span></label></p>
+        <input type="radio" name="passport" value="yes" required /><label>Yes</label>
+        <input type="radio" name="passport" value="no" required /><label>No</label>
+      </div>
+      <div class="container">
+        <label for="attachImage">Upload Photo:<span style="color:red;">*</span></label>
+        <input id="attachImage" type="file" name="attachImage" required />
+      </div>
+      <div class="container">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    function formValidation(event) {
+      var emailEL = document.getElementById("email");
+      var mobileNoEL = document.getElementById("mobileno");
+      var passportRadios = document.getElementsByName("passport");
+      // Email validation
+      var email = emailEL.value;
+      var emailRegex = /^\S+@\S+\.\S+$/; // Simple email format validation regex
+      if (!emailRegex.test(email)) {
+        alert("Invalid email address");
+        emailEL.focus();
+        event.preventDefault();
+        return;
+      }
+      // Mobile number validation
+      var mobileNo = mobileNoEL.value;
+      var mobileNoRegex = /^[0-9]{10}$/; // 10-digit mobile number
+      if (!mobileNoRegex.test(mobileNo)) {
+        alert("Invalid mobile number");
+        mobileNoEL.focus();
+        event.preventDefault();
+        return;
+      }
+      var isPassportSelected = Array.from(passportRadios).some(function(radio) {
+        return radio.checked;
+      });
+      if (!isPassportSelected) {
+        alert("Please select an option for the Passport question");
+        event.preventDefault();
+        return;
+      }
+    }
+  </script>
+</body>
+</html>
